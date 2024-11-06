@@ -36,3 +36,7 @@ dealer_score = dealer_card(dealer_score)
 actual_score(dealer_score,dealerCard)
 print(playerCard)
 print(dealerCard)
+
+
+
+print('gfsfhsfsfsdsgs')
