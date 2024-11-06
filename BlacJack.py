@@ -37,6 +37,3 @@ actual_score(dealer_score,dealerCard)
 print(playerCard)
 print(dealerCard)
 
-
-
-print('gfsfhsfsfsdsgs')
