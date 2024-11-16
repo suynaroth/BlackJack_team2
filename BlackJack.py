@@ -78,31 +78,27 @@ while True:
     if isFreshStart:
         Start = input('Are you ready to play? (y/n) : ')
     else: Start = input('Do you want to play again? (y/n) : ')
-    if Start == 'y' or 'n':
-        if Start == 'y':
-            isFreshStart = False
-            for _ in range(2):
-                draw_card(playerCard)
+    if Start not in ('y','n'): continue
+    if Start == 'y':
+        isFreshStart = False
+        for _ in range(2):
+            draw_card(playerCard)
+            draw_card(dealerCard)
+        isBlackJack = black_jack(playerCard, dealerCard)
+        if not isBlackJack:
+            init_display(playerCard, dealerCard)
+            while calculate_score(dealerCard) < 17:
                 draw_card(dealerCard)
-            isBlackJack = black_jack(playerCard, dealerCard)
-            if not isBlackJack:
-                init_display(playerCard, dealerCard)
-                while calculate_score(dealerCard) < 17:
-                    draw_card(dealerCard)
-                while True:
-                    playerScore = calculate_score(playerCard)
-                    dealerScore = calculate_score(dealerCard)
-                    if playerScore > 21 or playerScore == 21 or dealerScore == 21 : break
-                    drawMore = input('Do you want to draw more card? (y/n) : ').lower()
-                    if drawMore == 'y' or 'n':
-                        if drawMore == 'y':
-                            draw_card(playerCard)
-                            init_display(playerCard,dealerCard)
-                        if drawMore == 'n':
-                            break
-                final_display()
-                compare(playerScore,dealerScore)
-        if Start == 'n':
-            break
-
-
+            while True:
+                playerScore = calculate_score(playerCard)
+                dealerScore = calculate_score(dealerCard)
+                if playerScore >= 21 or dealerScore == 21: break
+                drawMore = input("Type 'y' to get another card 'n' to stop : ").lower()
+                if drawMore not in ('y', 'n'): continue
+                if drawMore == 'y':
+                    draw_card(playerCard)
+                    init_display(playerCard, dealerCard)
+                if drawMore == 'n': break
+            final_display()
+            compare(playerScore, dealerScore)
+    if Start == 'n': break
