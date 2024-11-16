@@ -37,18 +37,17 @@ def final_display():
     print(f'Dealer final score : {dealerScore}')
 
 def black_jack(player_card,dealer_card):
-    is_black_jack = False
     if calculate_score(dealer_card) == 21:
         final_display()
         print("You Lost.")
         print('Dealer got BlackJack.')
-        is_black_jack = True
+        return True
     if calculate_score(player_card) == 21 and calculate_score(dealer_card) != 21:
         final_display()
         print("You Win.")
         print('You got BlackJack.')
-        is_black_jack = True
-    return is_black_jack
+        return True
+    return False
 
 def compare(player_score,dealer_score):
     if player_score > 21:
