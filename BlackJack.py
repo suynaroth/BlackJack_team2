@@ -101,4 +101,6 @@ while True:
                 if drawMore == 'n': break
         final_display()
         compare(playerScore, dealerScore)
-    if Start == 'n': break
+    if Start == 'n':
+        print('Exit...')
+        break
