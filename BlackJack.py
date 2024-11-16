@@ -99,6 +99,6 @@ while True:
                     draw_card(playerCard)
                     init_display(playerCard, dealerCard)
                 if drawMore == 'n': break
-            final_display()
-            compare(playerScore, dealerScore)
+        final_display()
+        compare(playerScore, dealerScore)
     if Start == 'n': break
