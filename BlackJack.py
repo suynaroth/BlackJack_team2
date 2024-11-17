@@ -90,9 +90,10 @@ while True:
             playerScore = calculate_score(playerCard)
         revealDealer = True
         if dealerScore > 21 and playerScore > 21: revealDealer = False
-    final_display(revealDealer)
-    compare(playerScore, dealerScore)
+        final_display(revealDealer)
+        compare(playerScore, dealerScore)
     if Start == 'n':
         print('Exit...')
         break
+
 
