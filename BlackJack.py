@@ -5,7 +5,7 @@ playerCard = []
 dealerCard = []
 playerScore = 0
 dealerScore = 0
-isBlackJack = False
+revealDealer = True
 isFreshStart = True
 Start = ''
 drawMore = ''
@@ -26,30 +26,20 @@ def init_display(player_card,dealer_card):
     print(f'Your score : {calculate_score(playerCard)}',end = '\n' * 2)
     print(f'Dealer first card : {dealer_card[0]}')
 
-def final_display():
+def final_display(reveal_dealer):
     print("Your final cards: ")
     for card in playerCard:
         print(card)
     print(f'You final score : {playerScore}')
-    print("Dealer's final cards: ")
-    for card in dealerCard:
-        print(card)
-    print(f'Dealer final score : {dealerScore}')
-
-def black_jack(player_card,dealer_card):
-    if calculate_score(dealer_card) == 21:
-        final_display()
-        print("You Lost.")
-        print('Dealer got BlackJack.')
-        return True
-    if calculate_score(player_card) == 21 and calculate_score(dealer_card) != 21:
-        final_display()
-        print("You Win.")
-        print('You got BlackJack.')
-        return True
-    return False
+    if reveal_dealer:
+        print("Dealer's final cards: ")
+        for card in dealerCard:
+            print(card)
+        print(f'Dealer final score : {dealerScore}')
 
 def compare(player_score,dealer_score):
+    if dealer_score == 21 and isFreshStart:
+        print('dealer got black jack, You lost.')
     if player_score > 21:
         print('You lost.')
         print('Your score go over 21.')
@@ -71,7 +61,7 @@ def compare(player_score,dealer_score):
     if player_score == dealerScore:
         print('Draw')
 
-#game start
+#game start 
 while True:
     playerCard.clear()
     dealerCard.clear()
@@ -84,23 +74,28 @@ while True:
         for _ in range(2):
             draw_card(playerCard)
             draw_card(dealerCard)
-        isBlackJack = black_jack(playerCard, dealerCard)
-        if not isBlackJack:
+        dealerScore = calculate_score(dealerCard)
+        playerScore = calculate_score(playerCard)
+        if playerScore == 21 or dealerScore == 21 : break
+        while calculate_score(dealerCard) < 17:
+            draw_card(dealerCard)
+        dealerScore = calculate_score(dealerCard)
+        while True:
+            playerScore = calculate_score(playerCard)
+            if playerScore >= 21: break
             init_display(playerCard, dealerCard)
-            while calculate_score(dealerCard) < 17:
-                draw_card(dealerCard)
-            while True:
-                playerScore = calculate_score(playerCard)
-                dealerScore = calculate_score(dealerCard)
-                if playerScore >= 21 or dealerScore == 21: break
-                drawMore = input("Type 'y' to get another card 'n' to stop : ").lower()
-                if drawMore not in ('y', 'n'): continue
-                if drawMore == 'y':
-                    draw_card(playerCard)
-                    init_display(playerCard, dealerCard)
-                if drawMore == 'n': break
-        final_display()
+            drawMore = input("Type 'y' to get another card 'n' to stop : ").lower()
+            if drawMore not in ('y', 'n'): continue
+            if drawMore == 'y':
+                draw_card(playerCard)
+                print("===================", end = '\n' * 2)
+            if drawMore == 'n': break
+        revealDealer = True
+        if dealerScore > 21 and playerScore > 21: revealDealer = False
+        final_display(revealDealer)
         compare(playerScore, dealerScore)
     if Start == 'n':
         print('Exit...')
         break
+
+
