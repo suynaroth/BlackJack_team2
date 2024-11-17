@@ -59,10 +59,12 @@ def compare(player_score,dealer_score):
 while True:
     playerCard.clear()
     dealerCard.clear()
+
     if isFreshStart:
         Start = input('Are you ready to play? (y/n) : ')
-    else: Start = input('Do you want to play again? (y/n) : ')
-    if Start not in ('y','n'): continue
+    else:
+        Start = input('Do you want to play again? (y/n) : ')
+    if Start not in ('y', 'n'): continue
     if Start == 'y':
         isFreshStart = False
         for _ in range(2):
@@ -70,24 +72,26 @@ while True:
             draw_card(dealerCard)
         dealerScore = calculate_score(dealerCard)
         playerScore = calculate_score(playerCard)
-        if playerScore == 21 or dealerScore == 21 : break
-        while calculate_score(dealerCard) < 17:
+        if playerScore == 21 or dealerScore == 21:
+            final_display(revealDealer)
+            compare(playerScore,dealerScore)
+            continue
+        while dealerScore < 17:
             draw_card(dealerCard)
-        dealerScore = calculate_score(dealerCard)
-        while True:
-            playerScore = calculate_score(playerCard)
-            if playerScore >= 21: break
+            dealerScore = calculate_score(dealerCard)
+        while playerScore < 21:
             init_display(playerCard, dealerCard)
             drawMore = input("Type 'y' to get another card 'n' to stop : ").lower()
             if drawMore not in ('y', 'n'): continue
             if drawMore == 'y':
                 draw_card(playerCard)
-                print("===================", end = '\n' * 2)
+                print("===================", end='\n' * 2)
             if drawMore == 'n': break
+            playerScore = calculate_score(playerCard)
         revealDealer = True
         if dealerScore > 21 and playerScore > 21: revealDealer = False
-        final_display(revealDealer)
-        compare(playerScore, dealerScore)
+    final_display(revealDealer)
+    compare(playerScore, dealerScore)
     if Start == 'n':
         print('Exit...')
         break
