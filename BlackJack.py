@@ -41,25 +41,19 @@ def compare(player_score,dealer_score):
     if dealer_score == 21 and isFreshStart:
         print('dealer got black jack, You lost.')
     if player_score > 21:
-        print('You lost.')
-        print('Your score go over 21.')
+        print('Bust! You lost.')
     if player_score == 21:
-        print("You Win.")
-        print('You got BlackJack.')
+        print("BlackJack! You Win.")
     if player_score < 21 < dealer_score:
-        print("You Win.")
-        print('Dealer goes over 21')
+        print("You Win! Dealer goes over 21")
     if player_score < dealer_score < 21:
         print("You lost.")
-        print('You score less than dealer')
     if dealer_score < player_score < 21:
         print("You Win.")
-        print('You score greater than dealer')
     if player_score != 21 and dealerScore == 21:
-        print("You lost.")
-        print('dealer got black jack')
+        print("You lost! dealer got black jack.")
     if player_score == dealerScore:
-        print('Draw')
+        print("It's a Draw")
 
 #game start 
 while True:
