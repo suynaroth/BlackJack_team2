@@ -39,21 +39,21 @@ def final_display(reveal_dealer):
 
 def compare(player_score,dealer_score):
     if dealer_score == 21 and len(dealerCard) == 2:
-        print('Dealer got BlackJack, You lost.')
+        print('Dealer got BlackJack, You Lost:(')
     if player_score > 21:
-        print('Bust! You lost.')
+        print('Bust! You Lost:(')
     if player_score == 21:
-        print("BlackJack! You Win.")
+        print("BlackJack! You Win:)")
     if player_score < 21 < dealer_score:
-        print("Dealer Bust! You Win.")
+        print("Dealer Bust! You Win:)")
     if player_score < dealer_score < 21:
-        print("You lost.")
+        print("You Lost:(")
     if dealer_score < player_score < 21:
-        print("You Win.")
+        print("You Win:)")
     if player_score != 21 and dealerScore == 21:
-        print("You lost! dealer got BlackJack.")
+        print("You Lost:( dealer got BlackJack.")
     if player_score == dealerScore:
-        print("It's a Draw")
+        print("It's a Draw.")
 
 #game start 
 while True:
