@@ -38,7 +38,7 @@ def final_display(reveal_dealer):
         print(f'Dealer final score : {dealerScore}')
 
 def compare(player_score,dealer_score):
-    if dealer_score == 21 and len(dealerCard) == 2:
+    if dealer_score == 21 and len(dealerCard) == 21:
         print('Dealer got BlackJack, You Lost:(')
     if player_score > 21:
         print('Bust! You Lost:(')
